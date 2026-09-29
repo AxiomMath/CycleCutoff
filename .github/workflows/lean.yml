@@ -1,0 +1,18 @@
+name: Lean
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /usr/local/.ghcup \
+                      /usr/share/swift /usr/local/share/powershell /usr/local/share/chromium || true
+          df -h /
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
